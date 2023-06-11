@@ -52,20 +52,21 @@ namespace Homework_number_48
 
     class Fish
     {
+        private int _maxAge;
+
         public Fish(string name, int age, int maxAge)
         {
             Name = name;
             Age = age;
-            MaxAge = maxAge;
+            _maxAge = maxAge;
         }
 
         public string Name { get; private set; }
         public int Age { get; private set; }
-        public int MaxAge { get; private set; }
-
+        
         public void AddAge()
         {
-            if (Age <= MaxAge)
+            if (Age <= _maxAge)
             {
                 Age += 1;
             }
@@ -73,7 +74,7 @@ namespace Homework_number_48
 
         public bool GetLives()
         {
-            return Age <= MaxAge;
+            return Age <= _maxAge;
         }
     }
 
