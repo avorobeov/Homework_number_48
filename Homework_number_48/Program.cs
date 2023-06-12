@@ -144,29 +144,28 @@ namespace Homework_number_48
             }
         }
 
-        private int GetNumber(string text)
+        private int GetNumber(string title)
         {
-            string inputUser;
-            int meaning = 0;
-            bool isCorrect = false;
+            bool isNumber = false;
+            string userInput;
+            int number = 0;
 
-            while (isCorrect == false)
+            while (isNumber == false)
             {
-                ShowMessage(text, ConsoleColor.Green);
+                ShowMessage(title, ConsoleColor.Blue);
+                userInput = Console.ReadLine();
 
-                inputUser = Console.ReadLine();
-
-                if (Int32.TryParse(inputUser, out meaning))
+                if (int.TryParse(userInput, out number))
                 {
-                    return meaning;
+                    isNumber = true;
                 }
                 else
                 {
-                    ShowMessage("Вы вели вместо числа строку", ConsoleColor.Red);
+                    ShowMessage("Не верный формат вода", ConsoleColor.Red);
                 }
             }
 
-            return meaning;
+            return number;
         }
 
         private void ShowMessage(string message, ConsoleColor color)
