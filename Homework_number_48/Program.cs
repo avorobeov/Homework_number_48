@@ -72,7 +72,7 @@ namespace Homework_number_48
             }
         }
 
-        public bool GetLives()
+        public bool IsAlive()
         {
             return Age <= _maxAge;
         }
@@ -96,7 +96,7 @@ namespace Homework_number_48
             {
                 _fishes[i].AddAge();
 
-                ShowMessage($"Имя: {_fishes[i].Name} Возвраст:{_fishes[i].Age} Жива ли рыбка:{_fishes[i].GetLives()}", ConsoleColor.Blue);
+                ShowMessage($"Имя: {_fishes[i].Name} Возвраст:{_fishes[i].Age} Жива ли рыбка:{_fishes[i].IsAlive()}", ConsoleColor.Blue);
             }
         }
 
