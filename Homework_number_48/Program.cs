@@ -35,11 +35,11 @@ namespace Homework_number_48
                 switch (userInput)
                 {
                     case CommandAddFish:
-                        aquarium.TryCreateFish();
+                        aquarium.AddFish();
                         break;
 
                     case CommandDeleteFish:
-                        aquarium.TryDeleteFish();
+                        aquarium.DeleteFish();
                         break;
 
                     case CommandExit:
@@ -61,20 +61,16 @@ namespace Homework_number_48
             _maxAge = maxAge;
         }
 
+        public bool IsAlive => Age <= _maxAge;
         public string Name { get; private set; }
         public int Age { get; private set; }
         
-        public void AddAge()
+        public void GrowOld()
         {
             if (Age <= _maxAge)
             {
                 Age += 1;
             }
-        }
-
-        public bool IsAlive()
-        {
-            return Age <= _maxAge;
         }
     }
 
@@ -94,13 +90,13 @@ namespace Homework_number_48
         {
             for (int i = 0; i < _fishes.Count; i++)
             {
-                _fishes[i].AddAge();
+                _fishes[i].GrowOld();
 
-                ShowMessage($"Имя: {_fishes[i].Name} Возвраст:{_fishes[i].Age} Жива ли рыбка:{_fishes[i].IsAlive()}", ConsoleColor.Blue);
+                ShowMessage($"№:{i} Имя: {_fishes[i].Name} Возвраст:{_fishes[i].Age} Жива ли рыбка:{_fishes[i].IsAlive}", ConsoleColor.Blue);
             }
         }
 
-        public void TryCreateFish()
+        public void AddFish()
         {
             int minAge = 1;
 
@@ -112,36 +108,47 @@ namespace Homework_number_48
 
             int maxAge = GetNumber("Ведите максимальный возраст рыбки:");
 
-            if (name != "" && age >= minAge && _fishes.Count <= _maxCountFishes)
+            if (TryCreateFish(name,age,maxAge,minAge) == true)
             {
-                _fishes.Add(new Fish(name, age, maxAge));
-
                 ShowMessage("Рыбка успешно добавлена в аквариум", ConsoleColor.Green);
             }
             else
             {
                 ShowMessage("Ошибка ! \nДанные не прошли проверку", ConsoleColor.Red);
             }
-
         }
 
-        public void TryDeleteFish()
+        public void DeleteFish()
         {
-            ShowMessage("Имя рыбки которую хотите достать из аквариума", ConsoleColor.Red);
+            int index = GetNumber("Индекс рыбки которую хотите достать из аквариума");
 
-            string userInput = Console.ReadLine();
-
-            for (int i = 0; i < _fishes.Count; i++)
+            if (IsIndexInList(index))
             {
-                if (userInput == _fishes[i].Name)
-                {
-                    _fishes.RemoveAt(i);
+                ShowMessage("Рыбка успешно убрана из аквариума", ConsoleColor.Red);
 
-                    ShowMessage("Рыбка успешно убрана из аквариума", ConsoleColor.Red);
-
-                    break;
-                }
+                _fishes.RemoveAt(index);
             }
+            else
+            {
+                ShowMessage("К сожалению рыбки с таким индексом нет", ConsoleColor.Red);
+            }
+        }
+
+        private bool TryCreateFish(string name, int age, int maxAge, int minAge)
+        {
+            if (name != "" && age >= minAge && _fishes.Count <= _maxCountFishes)
+            {
+                _fishes.Add(new Fish(name, age, maxAge));
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsIndexInList(int index)
+        {
+            return  index > 0 && index < _fishes.Count;
         }
 
         private int GetNumber(string title)
