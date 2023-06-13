@@ -64,7 +64,7 @@ namespace Homework_number_48
         public bool IsAlive => Age <= _maxAge;
         public string Name { get; private set; }
         public int Age { get; private set; }
-        
+
         public void GrowOld()
         {
             if (Age <= _maxAge)
@@ -77,7 +77,7 @@ namespace Homework_number_48
     class Aquarium
     {
         private List<Fish> _fishes;
-       
+
         private int _maxCountFishes;
 
         public Aquarium(List<Fish> fishes, int maxCountFish)
@@ -106,7 +106,7 @@ namespace Homework_number_48
 
             int maxAge = GetNumber("Ведите максимальный возраст рыбки:");
 
-            if (TryCreateFish(name,age,maxAge) == true)
+            if (TryCreateFish(name, age, maxAge) == true)
             {
                 ShowMessage("Рыбка успешно добавлена в аквариум", ConsoleColor.Green);
             }
@@ -146,7 +146,7 @@ namespace Homework_number_48
 
         private bool IsIndexInList(int index)
         {
-            return  index > 0 && index < _fishes.Count;
+            return index > 0 && index < _fishes.Count;
         }
 
         private int GetNumber(string title)
