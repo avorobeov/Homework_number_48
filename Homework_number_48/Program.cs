@@ -98,8 +98,6 @@ namespace Homework_number_48
 
         public void AddFish()
         {
-            int minAge = 1;
-
             ShowMessage("Ведите имя рыбки", ConsoleColor.Yellow);
 
             string name = Console.ReadLine();
@@ -108,7 +106,7 @@ namespace Homework_number_48
 
             int maxAge = GetNumber("Ведите максимальный возраст рыбки:");
 
-            if (TryCreateFish(name,age,maxAge,minAge) == true)
+            if (TryCreateFish(name,age,maxAge) == true)
             {
                 ShowMessage("Рыбка успешно добавлена в аквариум", ConsoleColor.Green);
             }
@@ -134,7 +132,7 @@ namespace Homework_number_48
             }
         }
 
-        private bool TryCreateFish(string name, int age, int maxAge, int minAge)
+        private bool TryCreateFish(string name, int age, int maxAge, int minAge = 1)
         {
             if (name != "" && age >= minAge && _fishes.Count <= _maxCountFishes)
             {
